@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Informasi Manajemen Karyawan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>MENU ADMIN KARYAWAN ABIDZAR</h2>
+        <ul>
+            <li><a href="#" onclick="showSection('dashboard')">Dashboard</a></li>
+            <li><a href="#" onclick="showSection('karyawan')">Karyawan</a></li>
+            <li><a href="#" onclick="showSection('jabatan')">Jabatan</a></li>
+            <li><a href="#" onclick="showSection('divisi')">Divisi</a></li>
+            <li><a href="#" onclick="showSection('absensi')">Absensi</a></li>
+            <li><a href="#" onclick="showSection('lembur')">Lembur</a></li>
+        </ul>
+    </div>
+
+    <div class="konten" id="dashboard">
+        <h1>Selamat Datang!</h1>
+        <div class="dashboard-container">
+            <div class="dashboard-card">
+                <h3>Total Karyawan</h3>
+                <div class="card-content">
+                    <p id="totalKaryawan">10</p>
+                    <i class="fas fa-users icon"></i>
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <h3>Total Absensi Bulan Ini</h3>
+                <div class="card-content">
+                    <p id="totalAbsensi">10</p>
+                    <i class="fas fa-calendar-check icon"></i>
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <h3>Total Lembur Bulan Ini</h3>
+                <div class="card-content">
+                    <p id="totalLembur">9</p>
+                    <i class="fas fa-clock icon"></i>
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <h3>Rata-rata Jam Kerja</h3>
+                <div class="card-content">
+                    <p id="rataJamKerja">7 Jam</p>
+                    <i class="fas fa-clock icon"></i>
+                </div>
+            </div>
+        </div>
+        <p>Selamat datang di <strong>Sistem Informasi Manajemen Karyawan</strong>, Tempat dimana anda bisa mengatur informasi Manajemen karyawan</p>
+    </div>
+    
+    <div class="konten" id="karyawan" style="display:none;">
+        <h2>Data Karyawan</h2>
+        <button onclick="toggleForm('formKaryawan')">Tambah Karyawan</button>
+        <div id="formKaryawan" class="form-container" style="display:none;">
+            <h3 class="form-title">Tambah Karyawan</h3>
+            <input type="text" id="namaKaryawan" placeholder="Nama" required>
+            <select id="kodeJabatanKaryawan" required>
+                <option value="" disabled selected>Pilih Kode Jabatan</option>
+                <option value="TIF33">TIF33 - HRD</option>
+                <option value="STF11">STF11 - Staff</option>
+                <option value="MNJ2">MNJ2 - Manajer</option>
+                <option value="TDR300">TDR300 - Admin</option>
+            </select>
+            <select id="kodeDivisiKaryawan" required>
+                <option value="" disabled selected>Pilih Kode Divisi</option>
+                <option value="JMK48">JMK48 - Keuangan</option>
+                <option value="MBR100">MBR100 - Produksi</option>
+                <option value="IT11">IT11 - IT</option>
+                <option value="UM1">UM1 - Umum</option>
+            </select>
+            <button onclick="addKaryawan()">Simpan</button>
+            <button onclick="toggleForm('formKaryawan')">Batal</button>
+        </div>
+        <table id="tabelKaryawan">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Kode Jabatan</th>
+                    <th>Kode Divisi</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="konten" id="jabatan" style="display:none;">
+        <h2>Data Jabatan</h2>
+        <table id="tabelJabatan">
+            <thead>
+                <tr>
+                    <th>Kode Jabatan</th>
+                    <th>Jabatan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>TIF33</td>
+                    <td>HRD</td>
+                </tr>
+                <tr>
+                    <td>STF11</td>
+                    <td>Staff</td>
+                </tr>
+                <tr>
+                    <td>MNJ2</td>
+                    <td>Manajer</td>
+                </tr>
+                <tr>
+                    <td>TDR300</td>
+                    <td>Admin</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="konten" id="divisi" style="display:none;">
+        <h2>Data Divisi</h2>
+        <table id="tabelDivisi">
+            <thead>
+                <tr>
+                    <th>Kode Divisi</th>
+                    <th>Divisi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>JMK48</td>
+                    <td>Keuangan</td>
+                </tr>
+                <tr>
+                    <td>MBR100</td>
+                    <td>Produksi</td>
+                </tr>
+                <tr>
+                    <td>IT11</td>
+                    <td>IT</td>
+                </tr>
+                <tr>
+                    <td>UM1</td>
+                    <td>Umum</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="konten" id="absensi" style="display:none;">
+        <h2>Data Absensi</h2>
+        <button onclick="toggleForm('formAbsensi')">Tambah Absensi</button>
+        <div id="formAbsensi" class="form-container" style="display:none;">
+            <h3 class="form-title">Tambah Absensi</h3>
+            <input type="text" id="namaKaryawanAbsensi" placeholder="Nama Karyawan" required>
+            <input type="date" id="tanggalAbsensi" required>
+            <select id="statusAbsensi" required>
+                <option value="" disabled selected>Pilih Status</option>
+                <option value="Hadir">Hadir</option>
+                <option value="Tidak Hadir">Tidak Hadir</option>
+                <option value="Izin">Izin</option>
+            </select>
+            <button onclick="addAbsensi()">Simpan</button>
+            <button onclick="toggleForm('formAbsensi')">Batal</button>
+        </div>
+        <table id="tabelAbsensi">
+            <thead>
+                <tr>
+                    <th>Nama Karyawan</th>
+                    <th>Tanggal</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="konten" id="lembur" style="display:none;">
+        <h2>Data Lembur</h2>
+        <button onclick="toggleForm('formLembur')">Tambah Lembur</button>
+        <div id="formLembur" class="form-container" style="display:none;">
+            <h3 class="form-title">Tambah Lembur</h3>
+            <input type="text" id="namaKaryawanLembur" placeholder="Nama Karyawan" required>
+            <input type="date" id="tanggalLembur" required>
+            <input type="text" id="jamLembur" placeholder="Jam Lembur (mis. 2 jam)" required>
+            <button onclick="addLembur()">Simpan</button>
+            <button onclick="toggleForm('formLembur')">Batal</button>
+        </div>
+        <table id="tabelLembur">
+            <thead>
+                <tr>
+                    <th>Nama Karyawan</th>
+                    <th>Tanggal</th>
+                    <th>Jam Lembur</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
